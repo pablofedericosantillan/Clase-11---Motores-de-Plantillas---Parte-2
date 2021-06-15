@@ -1,57 +1,42 @@
 const express = require('express');
-const handlebars = require('express-handlebars');
 const productos = require('./api/productos');
 
 // creo una app de tipo express
 const app = express();
+
 // incorporo el router
 const router = express.Router();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//establecemos la configuración de handlebars
-app.engine(
-    "hbs",
-    handlebars({
-        extname: ".hbs",
-        defaultLayout: 'index.hbs',
-    })
-);
-app.set("view engine","hbs");// en esta instruccion registramos nuestro motor
-app.set("views", "./views"); //en esta instruccion especificamos en que carpeta estan las vistas o planillas
-
-
-///0
-router.get("/", (req, res) => {
-    res.render('vista_inicio');
-});
+//establecemos la configuración de ejs
+app.set('views', './views');
+app.set('view engine', 'ejs');
 
 // A
-router.get('/listar', (req, res) => {
+router.get('/', (req, res) => {
     if(productos.item.length === 0){
-        res.render('vista', {productos: productos.item, hayProductos: false});
+        res.render('formulario', {productos: productos.item, hayProductos: false});
     }else{
-        res.render('vista', {productos: productos.item, hayProductos: true});
+        res.render('formulario', {productos: productos.item, hayProductos: true});
     }
 });
 
 //B
-router.get('/listar/:id', (req, res) => {
-    //res.json(productos.BuscarId(req.params.id)) 
+router.get('/:id', (req, res) => {
     if(productos.item.length === 0 || req.params.id > productos.item.length  ){
-        res.render('vista_id', {productos: [productos.BuscarId(req.params.id)], hayProductos: false});
+        res.render('formulario', {productos: [productos.BuscarId(req.params.id)], hayProductos: false});
     }else{
-        res.render('vista_id', {productos: [productos.BuscarId(req.params.id)], hayProductos: true});
+        res.render('formulario', {productos: [productos.BuscarId(req.params.id)], hayProductos: true});
     }
 });
 
 //C
-router.get('/guardar', (req, res) => {
-    res.render('index_guardar');
-});
+
 router.post('/guardar', (req, res) => {
 productos.item=productos.guardar(req.body);
-res.redirect('/api/productos/guardar');
+res.redirect('/api/productos/');
 });
 
 //D

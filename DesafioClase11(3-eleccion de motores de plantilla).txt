@@ -1,0 +1,3 @@
+Desafio de la Clase 11
+
+3) De los 3 motores de utilizados el que eligiria seria "ejs", debido a que me parecio muy facil su implementacion, es como utilizar html con la salvedad que en algunas lineas cambiar para que sea compatible con "ejs". Adicionalmente, segun la clase teorica, es una de los mas utilizados, por lo que aprender esta tecnoligia seria util.

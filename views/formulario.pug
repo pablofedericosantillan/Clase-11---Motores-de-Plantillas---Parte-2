@@ -1,0 +1,29 @@
+extend encabezado.pug 
+
+block formulario
+    body 
+        div(class=".container.mt-3")
+            div(class=".jumbotron")
+
+                h1(style='color:blue')="Ingrese datos" 
+                
+                form(action='/api/productos/guardar' method='post')
+                    div(class="form-group")
+                        label(for='title')
+                        b="Nombre"
+                        input(class='title.form-control' type='text' name='title')
+                
+                    div(class="form-group")           
+                        label(for='price')
+                        b="Precio"
+                        input(class='title.form-control' type='text' name='price')
+                
+                    div(class="form-group")    
+                        label(for='thumbnail')
+                        b="Foto"
+                        input(class='title.form-control' type='text' name='thumbnail')
+    
+                    button(class='.btn.btn-success.mt-3.mb-5')="Enviar"
+
+                h2(style='color:crimson')="Historial"    
+                include tabla

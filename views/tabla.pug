@@ -1,0 +1,17 @@
+block tabla 
+  div(class=".table-responsive")
+    if hayProductos
+        table(class=".table.table-dark")
+          tr(style='color:black')
+            th="Nombre"
+            th="Precio"
+            th="Foto URL"
+        
+          each p, i in productos 
+            tr
+              td=`${p.title}`
+              td=`${p.price}`      
+              td
+                img(width='50' src=`${p.thumbnail}`)
+    else
+      h3(alert="alert-danger")="no se encontraron datos" 
